@@ -30,21 +30,18 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
+    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # Uncomment the next line to enable the admin:
-    #'grappelli',
     'django.contrib.admin',
-    # Uncomment the next line to enable admin documentation:
-    'django.contrib.admindocs',
-    'markup_deprecated',
+    'django.contrib.sites',
     'django.contrib.comments',
-    'django.contrib.staticfiles',
+    'django.contrib.admindocs',
     'sblog',
+    'markup_deprecated' 
 )
 
 MIDDLEWARE_CLASSES = (
@@ -54,6 +51,9 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.csrf.CsrfMiddleware',  
+    'django.middleware.csrf.CsrfViewMiddleware',  
+    'django.middleware.csrf.CsrfResponseMiddleware',
 )
 
 SITE_ID = 1

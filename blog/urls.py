@@ -15,11 +15,11 @@ urlpatterns+=patterns('',
     url(r'^sblog/',include('sblog.urls')),
     )
 urlpatterns += patterns((''),
-    (r'^static/(?P<path>.*)$', 'django.views.static.serve',
+    url(r'^static/(?P<path>.*)$', 'django.views.static.serve',
             {'document_root': '/home/whoo/djcode/work/blog/static/'}
     ),
 )
 
 urlpatterns += patterns('',
-    (r'^comments/', include('django.contrib.comments.urls')),
+    url(r'^comments/', include('django.contrib.comments.urls')),
 )
