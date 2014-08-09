@@ -13,11 +13,11 @@
 .codehilite .gr { color: #FF0000 } /* Generic.Error */
 .codehilite .gh { color: #000080; font-weight: bold } /* Generic.Heading */
 .codehilite .gi { color: #00A000 } /* Generic.Inserted */
-.codehilite .go { color: #888888 } /* Generic.Output */
+.codehilite .go { color: #808080 } /* Generic.Output */
 .codehilite .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
 .codehilite .gs { font-weight: bold } /* Generic.Strong */
 .codehilite .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
-.codehilite .gt { color: #0044DD } /* Generic.Traceback */
+.codehilite .gt { color: #0040D0 } /* Generic.Traceback */
 .codehilite .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
 .codehilite .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
 .codehilite .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
