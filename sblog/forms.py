@@ -6,3 +6,7 @@ class BlogForm(forms.Form):
     
 class TagForm(forms.Form):
     tag_name = forms.CharField()
+    
+class WeiboForm(forms.Form):
+    """docstring for WeiboForm"""
+    massage = forms.CharField(widget=forms.Textarea)

@@ -1,13 +1,51 @@
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-from sblog.models import Blog,Tag,Author
-from django.http import Http404,HttpResponseRedirect
+from sblog.models import Blog,Tag,Author,Weibo
+from django.http import Http404,HttpResponseRedirect,HttpResponse
 from sblog.forms import BlogForm,TagForm
- 
+from django.contrib.comments.models import *
 def blog_list(request):
     blogs=Blog.objects.all()
     tags = Tag.objects.all()
-    return render_to_response("blog_list.html",{"blogs":blogs, "tags": tags})
+    recent_comments = Comment.objects.filter(is_public=True).order_by('-submit_date')[:5]
+    weibos = Weibo.objects.order_by('-publish_time')[:5]
+    return render_to_response("blog_list.html",{"blogs":blogs, "tags": tags, "weibos": weibos,"recent_comments":recent_comments})
+    
+def show_weibo(request):
+    weibos = Weibo.objects.order_by('-publish_time')[:5]
+    return render_to_response("blog_twitter.html", {"weibos": weibos})
+    
+def add_weibo(request):
+    c = {}
+    c.update(request)
+    if request.method == 'POST':
+        massage = request.POST['twitter']
+        author = Author.objects.get(id=1)
+        massage = Weibo(massage=massage, author=author)
+        massage.save()
+        weibos = Weibo.objects.order_by('-publish_time')[:5]
+        return render_to_response("blog_add_weibo.html",
+        {"weibos": weibos},
+        context_instance=RequestContext(request))
+    else:
+        return HttpResponse('dddd')
+        # blogs = Blog.objects.order_by('-id')
+        # tags = Tag.objects.all()
+        # return render_to_response("blog_list.html",
+        #     {"blogs": blogs, "tags": tags},
+        #     context_instance=RequestContext(request))
+    
+def blog_search(request):
+    tags = Tag.objects.all()
+    if 'search' in request.GET:
+        search = request.GET['search']
+        blogs = Blog.objects.filter(caption__icontains=search)
+        return render_to_response('blog_filter.html',
+            {"blogs": blogs, "tags": tags}, context_instance=RequestContext(request))
+    else:
+        blogs = Blog.objects.order_by('-id')
+        return render_to_response("blog_list.html", {"blogs": blogs, "tags": tags},
+            context_instance=RequestContext(request))
     
 def blog_show(request, id=''):
     try:

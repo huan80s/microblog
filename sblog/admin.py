@@ -1,5 +1,5 @@
 from django.contrib import admin
-from sblog.models import Author,Tag,Blog
+from sblog.models import Author,Tag,Blog,Weibo
 
 class AuthorAdmin(admin.ModelAdmin):
     """docstring for AuthorAdmin"""
@@ -17,3 +17,4 @@ class BlogAdmin(admin.ModelAdmin):
 admin.site.register(Author,AuthorAdmin)
 admin.site.register(Blog,BlogAdmin)
 admin.site.register(Tag)
+admin.site.register(Weibo)
