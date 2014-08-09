@@ -1,6 +1,6 @@
 {% extends "blog_base.html" %}
 {% load comments %}
-{% load gravatar %}
+
 
 {% block script %}
 <script type="text/javascript" charset="utf-8">
@@ -83,9 +83,12 @@ $(document).ready(function() {
          <hr class="soften">  
      {% get_comment_list for blog as blog_com %}
      {% for comment in blog_com %}
+     <div class="span1">
+                <img class="gravatar" src="{% gravatar_url comment.user_email %}">
+                </div>
          <div class="container-fluid none-padding">
              <p class="muted"><small>{{ comment.user }}</small><small>{{ comment.submit_date|date:"F,j,Y" }}</small></p> 
-             <img class="gravatar" src="{% gravatar_url comment.user_email %}">     
+                 
              {{ comment.comment }}           
          </div>
          <hr class="soften">                   

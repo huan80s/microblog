@@ -16,10 +16,11 @@
                 <a class="brand" href="#">WHOO&ANGEL</a>
                 <ul class="nav">
                     <li >
+                        
                         <a href="{% url 'bloglist' %}">home</a>
                     </li>
                     <li>
-                        <a href="#">about</a>
+                        <a href="#"><i class="icon-home icon-white"></i>about</a>
                     </li>
                     <li>
                         <a href="#">contact</a>

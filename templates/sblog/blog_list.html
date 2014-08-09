@@ -1,5 +1,6 @@
 {% extends "blog_base.html" %}
-{% load comments %}
+{%load comments%}
+{% load gravatar %}
 
 {% block title %} blog list {% endblock %}
 
@@ -33,14 +34,60 @@
 
 {% block aside %}   
 
-    <a class="btn" href=" {% url 'addblog' %}"><i class="icon-plus"></i> add new blog</a>
+    <a class="btn-small btn-primary" href=" {% url 'addblog' %}"><i class="icon-plus"></i> add new blog</a>
 
     {% block tags %}
         <div class="well">
             
             {% for tag in tags %}
-            <span class="label"><a href="{% url 'filtrblog' tag.id %}">{{ tag }}</a></span>
+            <span class="label label-success"><a href="{% url 'filtrblog' tag.id %}">{{ tag }}</a></span>
             {% endfor %}
         </div>
     {% endblock %}
+    <a class="btn" href=" {% url 'addmassage' %}"><i class="icon-plus"></i> add new weibo</a>
+    
+    {% block twitter %}
+    <div id="weibo" class="well">
+        {% for weibo in weibos %}
+            <p class="text-info">{{ weibo }}</p>                
+            <p class="text-success"><small>{{ weibo.publish_time }}</small></p>
+            <hr class="soften">
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block newlycomments %}
+<div class="well">
+    
+   
+{%load gravatar%}
+<ul class='recent-comments'>
+{%for comment in recent_comments%}
+<li>
+<div>
+	<span class='rc-img'>
+		<img src='{%gravatar_url comment.user_email%}'>
+	</span class='rc-body'>
+	<span>{{comment.user_name}} in 
+	<a href='{%url 'detailblog' comment.object_pk%}'>
+		{{comment.content_object.caption}}
+	</a> said: {{comment.comment|slice:":25"}}
+	</span>
+	<div class='rc-line'></div>
+</div>
+</li>
+{%endfor%}
+</ul>
+   </div>
+{% endblock %}
+    
+{%  block link %}
+    <div class="well">
+            <p class="muted"><i class="icon-user"></i>管理 </p>
+            <ul>
+            <li>
+            <a href="/admin/">Admin</a>
+            </li></ul>
+        </div>
+{% endblock %}
 {% endblock %}
